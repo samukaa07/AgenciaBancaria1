@@ -7,41 +7,41 @@ public class AgenciaBancaria {
 
 	// vamos pegar os dados que o cliente usuï¿½rio esta digitando
 	static Scanner input = new Scanner(System.in);
-	
+
 	// nossa agencia bancaria tem varias contas precisamos de uma lista de contas
 	static ArrayList<Conta> contasBancarias;
-	
-	
+
+
 	public static void main(String[] args) {
-		
+
 		// instanciando contasBancarias
 		contasBancarias = new ArrayList<Conta>();	// arrayList do tipo <Conta>
 
 		//criando um menu de operaï¿½ï¿½es sacar ou transferir ou depositar
 		operacoes();
-		
+
 	}
 
 
 	public static void operacoes() {
 
 		System.out.println("------------------------------------------------------");
-		System.out.println("-------------Bem vindos a nossa Agï¿½ncia---------------");
+		System.out.println("-------------Bem vindos a nossa Agência---------------");
 		System.out.println("------------------------------------------------------");
-		System.out.println("***** Selecione uma Operaï¿½ï¿½o que deseja realizar *****");
-		System.out.println("|		Opï¿½ï¿½o 1 - Criar conta		|");
-		System.out.println("|		Opï¿½ï¿½o 2 - Depositar			|");
-		System.out.println("|		Opï¿½ï¿½o 3 - Sacar				|");
-		System.out.println("|		Opï¿½ï¿½o 4 - Transferir		|");
-		System.out.println("|		Opï¿½ï¿½o 5 - Listar			|");
-		System.out.println("|		Opï¿½ï¿½o 6 - Sair				|");
-		
+		System.out.println("***** Selecione uma Operação que deseja realizar *****");
+		System.out.println("|		Opçãoo 1 - Criar conta		|");
+		System.out.println("|		Opçãoo 2 - Depositar		|");
+		System.out.println("|		Opçãoo 3 - Sacar			|");
+		System.out.println("|		Opçãoo 4 - Transferir		|");
+		System.out.println("|		Opçãoo 5 - Listar			|");
+		System.out.println("|		Opçãoo 6 - Sair				|");
+
 		// vamos criar um swtich case para chamar cada mï¿½todo de acordo com cada opï¿½ï¿½o que o usuï¿½rio digitar
 		// chamar imput que chamou acima e pegar o inteiro
 		int operacao = input.nextInt();
-		
+
 		//agora fazendo estrutura do swhitch case.
-		
+
 		switch(operacao) {
 		case 1:
 			criarConta();
@@ -59,154 +59,154 @@ public class AgenciaBancaria {
 			listarContas();
 			break;
 		case 6:
-			System.out.println(" Obrigado por usar nossa agï¿½ncia");
+			System.out.println(" Obrigado por usar nossa agência");
 			System.exit(0); // system.exit sai do programa
-			
-		default:  	// caso usuï¿½rio digitar alguma opï¿½ï¿½o que nï¿½o tenha 
-			System.out.println("opï¿½ï¿½o invï¿½lida!");
+
+		default:  	// caso usuï¿½rio digitar alguma opï¿½ï¿½o que nï¿½o tenha
+			System.out.println("operação inválida!");
 			operacoes(); //aqui chama menu principal operacoes pq n quer sair por ter digitado numero errado quero que chama menu denovo
 			break;
-					
-			
+
+
 		}
-		
+
 	}
-	
+
 	// criando o mï¿½todo criar conta que fizemos no switch
 	// aqui precisamos de nome, cpf, e-mail e passar essa pessoa em uma conta e a conta e uma lista de conta
 	public static void criarConta() {
-		
+
 		System.out.println("\nNome:");
-		// a gente define uma variavel que vai armazenar esse nome que o usuario digitar e receber o que usuario digitar 
+		// a gente define uma variavel que vai armazenar esse nome que o usuario digitar e receber o que usuario digitar
 		String nome = input.next();
 
 		System.out.println("\nCPF:");
 		String cpf = input.next();
-		
+
 		System.out.println("\nEmail:");
 		String email = input.next();
-		
-		// agora precisamos instanciar uma pessoa e passar esses dados para ela 
+
+		// agora precisamos instanciar uma pessoa e passar esses dados para ela
 		Pessoa pessoa = new Pessoa(nome, cpf, email);
-		
+
 		// aqui a gente quer adicionar essa pessoa a essa conta
 		Conta conta = new Conta(pessoa);
-		
+
 		//preciso adicionar essa conta a cima na minha lista de contas
-		//aqui chamo meu metodo contasBancarias.add e ele ja passa minha conta aqui 
+		//aqui chamo meu metodo contasBancarias.add e ele ja passa minha conta aqui
 		contasBancarias.add(conta);
-		
+
 		//agora a gente sï¿½ fala para o cliente que a conta foi criada com sucesso
 		System.out.println(" Sua conta foi criada com sucesso!");
 
 		// agora chamo meu metodo operacoes denovo para saber qual a proxima aï¿½ï¿½o que o usuï¿½rio quer fazer
 		operacoes();
-			
+
 	}
 	// precisamos agora fazer metodo para contar uma conta com usuï¿½rio digitar a conta
-	// vamos criar o mï¿½todo encontrarConta que recebe o numero que o usuï¿½rio digitar 
+	// vamos criar o mï¿½todo encontrarConta que recebe o numero que o usuï¿½rio digitar
 	private static Conta encontrarConta(int numeroConta) {
 	//tem que retornar alguma coisa, retornar como null pq se a conta exitir a gente vai retornar
 	Conta conta = null;
 	// aqui precisa saber se a conta existe vamos conferir a lista de contas da nossa agencia bancaria
 	if(contasBancarias.size() > 0) { //chamo a contasBancaria.size esse tamo tem que ser maior que 0, precisa conter algo pra ser existente
-		for(Conta c : contasBancarias) { 
+		for(Conta c : contasBancarias) {
 			if(c.getNumeroConta() == numeroConta ) { // se essa conta dentro da conta bancaria foir igual ao numero da conta q usuario digitou
 				conta = c; // inves de ser num ela vai receber conta c
 			}
-		
+
 		 }
 	}
-	
+
 		return conta;
 
 }
-	// mï¿½todo depositar 
+	// mï¿½todo depositar
 	public static void depositar() {
-		System.out.println("Nï¿½mero da conta: ");
+		System.out.println("Número da conta: ");
 		int numeroConta = input.nextInt();  //dai vou armazenar esse valor usuï¿½rio digitou
-		
+
 		// passo esse numero para a minha conta
 		// chamo o metodo encontrarConta e passo o numero da conta que o usuï¿½rio digitou para ele
 		Conta conta = encontrarConta(numeroConta); // vai realizar a logica do mï¿½todo encontrar conta pra ver se existe
 		if(conta != null) {
 			System.out.println("Qual valor deseja depositar ?");
-			Double valorDeposito = input.nextDouble(); // se a conta existir vai pedir o numero para armazenar 
-			conta.depositar(valorDeposito); // vai passar esse valor para o mï¿½todo depositar 
+			Double valorDeposito = input.nextDouble(); // se a conta existir vai pedir o numero para armazenar
+			conta.depositar(valorDeposito); // vai passar esse valor para o mï¿½todo depositar
 			System.out.println("Valor depositado com sucesso!");
 		}else { // se for valor positivo ele vai dizer a mensagem acima se for nï¿½gativo menor que zero mensagem a baixo
-			System.out.println("Conta nï¿½o encontrada! ");
-		}	
-		
+			System.out.println("Conta nãoo encontrada! ");
+		}
+
 		operacoes(); //menu de opï¿½ï¿½o de usuï¿½rios
 	}
-	
-	// mï¿½todo sacar parecido com o mï¿½todo depositar	
+
+	// mï¿½todo sacar parecido com o mï¿½todo depositar
 	public static void sacar() {
-		System.out.println("Nï¿½mero da conta: "); // pedindo pro usuï¿½rio o numero de uma conta
-		int numeroConta = input.nextInt();  // vou armazenar essa conta digitada 
+		System.out.println("Número da conta: "); // pedindo pro usuï¿½rio o numero de uma conta
+		int numeroConta = input.nextInt();  // vou armazenar essa conta digitada
 		Conta conta = encontrarConta(numeroConta);  //vou ver se essa conta existe
-		
-		if(conta != null) { 	// se a conta existir 
-			System.out.println("Qual valor deseja sacar ?"); 
+
+		if(conta != null) { 	// se a conta existir
+			System.out.println("Qual valor deseja sacar ?");
 			Double valorSaque = input.nextDouble(); //pergunto valor que vai sacar
 			conta.sacar(valorSaque); // passo esse valor para o meu mï¿½todo sacar, pra ver se o valor ï¿½ >0 e se tem saldo se tiver subtrai do saldo
 			//System.out.println("Valor sacado com sucesso!");
 		}else { //se nï¿½o ele vai dar mesagem abaixo
-			System.out.println("Conta nï¿½o encontrada! ");
-		}	
-		
+			System.out.println("Conta não encontrada! ");
+		}
+
 		operacoes(); //menu de opï¿½ï¿½o de usuï¿½rios
-						
+
 	}
-	
+
 	// mï¿½todo trasnferir
-	// preciso ter uma conta que vai enviar a transferencia e a conta que vai receber a transferencia 
+	// preciso ter uma conta que vai enviar a transferencia e a conta que vai receber a transferencia
 	public static void transferir() {
-		System.out.println("Nï¿½mero da conta do remetente: ");
+		System.out.println("Número da conta do remetente: ");
 		int numeroContaRemetente = input.nextInt(); // numeroCOntaRemetente armazena o valor digitado.
-		//vou criar uma contaRemetente e ver se ela existe pra estar realizando tranasferencia 
+		//vou criar uma contaRemetente e ver se ela existe pra estar realizando tranasferencia
 		Conta contaRemetente = encontrarConta(numeroContaRemetente); // chama o mï¿½todo encontrarConta e vou passar o (numeroContaRemetente)
-		
+
 		if(contaRemetente != null) { // se conta do remetente existir e for diferente de null
-			System.out.println("Nï¿½mero da conta do destinatï¿½rio: ");
-			int numeroContaDestinatario = input.nextInt(); // armazeno esse numeroCOntaDestinatario 
-			
+			System.out.println("Número da conta do destinatï¿½rio: ");
+			int numeroContaDestinatario = input.nextInt(); // armazeno esse numeroCOntaDestinatario
+
 			// chamo o mï¿½todo encontrarConta para quem eu quero transferir existe
 			Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
-			
+
 			// se a conta de destinatario exixtir ou diferente de null
 			if(contaDestinatario != null) {
 				System.out.println("Valor da trasnferencia: "); // pergunto valor da transferencia
 				Double valor = input.nextDouble(); // armazeno a informaï¿½ï¿½o
-				
+
 				// pego minha contaRemetente chamo o mï¿½todo transferir, passo minha contaDestinaratio e o valor
 				contaRemetente.transferir(contaDestinatario, valor);
 			}else{
-				System.out.println("A conta para depï¿½sito nï¿½o foi encontrada");
+				System.out.println("A conta para depósito não foi encontrada");
 				}
 			}else{
-				System.out.println("Conta para transferï¿½ncia nï¿½o encontrada");
-				
+				System.out.println("Conta para transferência não encontrada");
+
 			}
-					
+
 		operacoes();
 	}
 
 	// mï¿½todo ver/listar conta
 	public static void listarContas() {
 		if (contasBancarias.size() > 0) {  //se minha lista de contas bacarias for maior > 0 vou percorrer a lista
-			for (Conta conta : contasBancarias) { //para cada conta dentro da minha lista de contaBancarias 
+			for (Conta conta : contasBancarias) { //para cada conta dentro da minha lista de contaBancarias
 				System.out.println(conta);	// imprimo cada uma delas
 			}
 
 		} else {	// caso contrario informo que n tem contas cadastradas
-			System.out.println("Nï¿½o hï¿½ contas cadastradas");
+			System.out.println("Não há contas cadastradas");
 		}
 		operacoes();
 	}
 
 }
-	
+
 
 
